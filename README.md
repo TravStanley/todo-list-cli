@@ -12,8 +12,8 @@ Starts as a simple personal to-do list and is designed to grow into a collaborat
   - **ID** (auto-generated)
   - **Title**
   - **Description** (optional)
-  - **Priority** (`Low`, `Medium`, `High`)
-  - **Status** (`Pending`, `In Progress`, `Done`)
+  - **Priority** (`Low`, `Medium`, `High`) - will use an enum
+  - **Status** (`Pending`, `In Progress`, `Done`) - will use an enum
   - **Due date** (optional)
 - Store tasks locally in a **TOML file** for simplicity.
 - Easy-to-use CLI interface with clear commands and options.

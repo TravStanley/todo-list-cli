@@ -1,5 +1,7 @@
 use clap::{Parser, Subcommand};
 
+use crate::enums::{Priority, Status};
+
 #[derive(Parser, Debug)]
 #[command(name = "todo", about = "A simple to-do list CLI")]
 pub struct Cli {
@@ -14,9 +16,9 @@ pub enum Commands {
         task: String,
 
         #[arg(short, long, default_value = "low")]
-        priority: String,
+        priority: Priority,
 
-        status: String,
+        status: Status,
     },
 
     Delete {

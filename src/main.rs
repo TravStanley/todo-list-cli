@@ -1,7 +1,10 @@
-use clap::Parser;
-
 mod cli;
+mod enums;
+
+use clap::Parser;
 use cli::{Cli, Commands};
+use enums::{Priority, Status};
+
 fn main() {
     let cli = Cli::parse();
 
