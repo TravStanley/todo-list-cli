@@ -8,7 +8,7 @@ pub struct Task {
     pub description: Option<String>,
     pub priority: Priority,
     pub status: Status,
-    #[serde(with = "date_format")]
+    #[serde(default, with = "date_format")]
     pub due_date: Option<NaiveDate>,
 }
 
