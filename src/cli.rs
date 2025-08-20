@@ -35,6 +35,8 @@ pub enum Commands {
 }
 
 fn parse_date(date: &str) -> Result<NaiveDate, String> {
-    NaiveDate::parse_from_str(date, "%Y-%m-%d")
+    let normalized = date.replace('/', "-").replace('.', "-").replace(',', "-");
+
+    NaiveDate::parse_from_str(&normalized, "%Y-%m-%d")
         .map_err(|e| format!("Invalid date '{}': {}", date, e))
 }
