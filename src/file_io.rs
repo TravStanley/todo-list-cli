@@ -18,3 +18,20 @@ pub fn add_todo_object(task: Task) -> Result<(), Box<dyn std::error::Error>> {
     fs::write(TASK_TOML, toml::to_string(&task_list)?)?;
     Ok(())
 }
+
+pub fn delete_todo_object(task_name: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let mut task_list = get_todo_list()?;
+
+    if let Some(pos) = task_list
+        .tasks
+        .iter()
+        .position(|task| task.name == task_name)
+    {
+        task_list.tasks.remove(pos);
+        fs::write(TASK_TOML, toml::to_string(&task_list)?)?;
+    } else {
+        return Err(format!("Task '{}' not found", task_name).into());
+    }
+
+    return Ok(());
+}

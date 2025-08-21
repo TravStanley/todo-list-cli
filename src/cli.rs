@@ -30,7 +30,7 @@ pub enum Commands {
     },
 
     Delete {
-        task: String,
+        task_name: String,
     },
 }
 

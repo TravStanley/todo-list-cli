@@ -29,6 +29,9 @@ fn main() {
                 Err(e) => println!("{e:?}"),
             }
         }
-        Commands::Delete { task } => println!("{task:?} deleted!\n"),
+        Commands::Delete { task_name } => match file_io::delete_todo_object(&task_name) {
+            Ok(_) => println!("{task_name:?} deleted!\n"),
+            Err(e) => println!("{e:?}"),
+        },
     }
 }
