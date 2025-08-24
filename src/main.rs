@@ -33,5 +33,11 @@ fn main() {
             Ok(_) => println!("{task_name:?} deleted!\n"),
             Err(e) => println!("{e:?}"),
         },
+        Commands::Status { task_name, status } => {
+            match file_io::update_todo_object(&task_name, None, None, Some(status), None) {
+                Ok(_) => println!("{task_name:?} status updated to {status:?}!\n"),
+                Err(e) => println!("{e:?}"),
+            }
+        }
     }
 }

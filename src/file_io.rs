@@ -1,4 +1,7 @@
+use chrono::NaiveDate;
 use std::fs;
+
+use crate::enums::{Priority, Status};
 
 use super::structs::{Task, TaskList};
 
@@ -34,4 +37,41 @@ pub fn delete_todo_object(task_name: &str) -> Result<(), Box<dyn std::error::Err
     }
 
     return Ok(());
+}
+
+pub fn update_todo_object(
+    task_name: &str,
+    description: Option<String>,
+    priority: Option<Priority>,
+    status: Option<Status>,
+    due_date: Option<NaiveDate>,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let mut task_list = get_todo_list()?;
+
+    if let Some(pos) = task_list
+        .tasks
+        .iter()
+        .position(|task| task.name == task_name)
+    {
+        let task = &mut task_list.tasks[pos];
+
+        if let Some(desc) = description {
+            task.description = Some(desc);
+        }
+        if let Some(p) = priority {
+            task.priority = p;
+        }
+        if let Some(s) = status {
+            task.status = s;
+        }
+        if let Some(date) = due_date {
+            task.due_date = Some(date);
+        }
+
+        fs::write(TASK_TOML, toml::to_string(&task_list)?)?;
+    } else {
+        return Err(format!("Task '{}' not found", task_name).into());
+    }
+
+    Ok(())
 }

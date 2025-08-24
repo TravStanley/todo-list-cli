@@ -32,6 +32,12 @@ pub enum Commands {
     Delete {
         task_name: String,
     },
+
+    Status {
+        task_name: String,
+
+        status: Status,
+    },
 }
 
 fn parse_date(date: &str) -> Result<NaiveDate, String> {
