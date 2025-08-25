@@ -17,8 +17,18 @@ fn get_todo_list() -> Result<TaskList, toml::de::Error> {
 
 pub fn add_todo_object(task: Task) -> Result<(), Box<dyn std::error::Error>> {
     let mut task_list = get_todo_list()?;
-    task_list.tasks.push(task);
-    fs::write(TASK_TOML, toml::to_string(&task_list)?)?;
+
+    if let Some(_) = task_list
+        .tasks
+        .iter()
+        .position(|task_iter| task.name == task_iter.name)
+    {
+        return Err(format!("Task '{}' is a duplicate", task.name).into());
+    } else {
+        task_list.tasks.push(task);
+        fs::write(TASK_TOML, toml::to_string(&task_list)?)?;
+    }
+
     Ok(())
 }
 
