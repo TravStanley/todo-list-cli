@@ -38,6 +38,8 @@ pub enum Commands {
 
         status: Status,
     },
+
+    Showall {},
 }
 
 fn parse_date(date: &str) -> Result<NaiveDate, String> {

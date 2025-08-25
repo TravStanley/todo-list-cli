@@ -39,5 +39,9 @@ fn main() {
                 Err(e) => println!("{e:?}"),
             }
         }
+        Commands::Showall {} => match file_io::print_tasks_to_cli() {
+            Ok(_) => println!("\n"),
+            Err(e) => println!("{e:?}"),
+        },
     }
 }

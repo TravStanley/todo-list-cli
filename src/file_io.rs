@@ -75,3 +75,14 @@ pub fn update_todo_object(
 
     Ok(())
 }
+
+pub fn print_tasks_to_cli() -> Result<(), Box<dyn std::error::Error>> {
+    let task_list = get_todo_list()?;
+
+    task_list
+        .tasks
+        .iter()
+        .for_each(|task_obj| println!("{:?}", task_obj));
+
+    Ok(())
+}
