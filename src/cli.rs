@@ -1,7 +1,7 @@
 use chrono::NaiveDate;
 use clap::{Parser, Subcommand};
 
-use crate::enums::{Priority, Status};
+use crate::models::{Priority, Status};
 
 #[derive(Parser, Debug)]
 #[command(name = "todo", about = "A simple to-do list CLI")]
@@ -38,7 +38,6 @@ pub enum Commands {
 
         status: Status,
     },
-
     Showall {},
 }
 
